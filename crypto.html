@@ -19,7 +19,7 @@
         }
 
         .nav {
-            max-width: 1150px;
+            max-width: 1250px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -46,7 +46,7 @@
         }
 
         main {
-            max-width: 1150px;
+            max-width: 1250px;
             margin: 2rem auto 3rem;
             padding: 0 1.5rem;
         }
@@ -64,7 +64,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 1.2rem;
         }
 
@@ -128,6 +128,12 @@
             color: #9ca3af;
         }
 
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
         @media (max-width: 900px) {
             .grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -148,6 +154,7 @@
         <div class="brand">Poparnassus</div>
         <nav>
             <a href="index.html">Accueil</a>
+            <a href="masterapp.html">MasterApp</a>
             <a href="crypto.html">Crypto</a>
         </nav>
     </div>
@@ -156,7 +163,7 @@
 <main>
     <h1>Raccourcis Crypto</h1>
     <p class="subtitle">
-        Pense-bête des plateformes et outils que tu utilises.
+        Pense-bête des plateformes, écosystèmes et launchpads que tu utilises.
     </p>
 
     <div class="grid">
@@ -448,10 +455,84 @@
             </ul>
         </div>
 
+        <!-- Colonne 5 : Launchpads / IDO -->
+        <div class="col">
+            <h2>Launchpads / IDO</h2>
+            <ul>
+                <li class="section-title">Launchpads CEX</li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/binance.com" alt="Binance Launchpad">
+                    <a class="link" href="https://launchpad.binance.com" target="_blank">Binance Launchpad</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/binance.com" alt="Binance Launchpool">
+                    <a class="link" href="https://www.binance.com/en/launchpool" target="_blank">Binance Launchpool</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/kucoin.com" alt="KuCoin Spotlight">
+                    <a class="link" href="https://www.kucoin.com/spotlight" target="_blank">KuCoin Spotlight</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/bybit.com" alt="Bybit Launchpad">
+                    <a class="link" href="https://www.bybit.com/en/trade/spot/launchpad" target="_blank">Bybit Launchpad</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/okx.com" alt="OKX Jumpstart">
+                    <a class="link" href="https://www.okx.com/jumpstart" target="_blank">OKX Jumpstart</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/gate.io" alt="Gate.io Startup">
+                    <a class="link" href="https://www.gate.io/startup" target="_blank">Gate.io Startup</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/htx.com" alt="HTX Primelist">
+                    <a class="link" href="https://www.htx.com" target="_blank">HTX Primelist</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/bitget.com" alt="Bitget Launchpad">
+                    <a class="link" href="https://www.bitget.com" target="_blank">Bitget Launchpad</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/mexc.com" alt="MEXC Launchpad">
+                    <a class="link" href="https://www.mexc.com/launchpad" target="_blank">MEXC Launchpad</a>
+                </li>
+
+                <li class="section-title">Launchpads DeFi / IDO</li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/polkastarter.com" alt="Polkastarter">
+                    <a class="link" href="https://polkastarter.com" target="_blank">Polkastarter</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/bscpad.com" alt="BSCPad">
+                    <a class="link" href="https://bscpad.com" target="_blank">BSCPad</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/seedify.fund" alt="Seedify">
+                    <a class="link" href="https://seedify.fund" target="_blank">Seedify</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/daomaker.com" alt="DAO Maker">
+                    <a class="link" href="https://daomaker.com" target="_blank">DAO Maker</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/pinksale.finance" alt="PinkSale">
+                    <a class="link" href="https://pinksale.finance" target="_blank">PinkSale</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/trustswap.com" alt="TrustSwap">
+                    <a class="link" href="https://trustswap.com/launchpad" target="_blank">TrustSwap Launchpad</a>
+                </li>
+                <li>
+                    <img class="logo" src="https://logo.clearbit.com/coinlist.co" alt="CoinList">
+                    <a class="link" href="https://coinlist.co" target="_blank">CoinList</a>
+                </li>
+            </ul>
+        </div>
+
     </div>
 
     <p class="note">
-        
+        (Évidemment, DYOR : certains launchpads DeFi sont plus risqués que d'autres.)
     </p>
 </main>
 
