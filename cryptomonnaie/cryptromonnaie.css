@@ -1,4 +1,106 @@
-/* ===== Nouveau bandeau POPARNASSUS (global) ===== */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0b1020;
+    color: #f5f5f5;
+}
+
+/* Ancien header ignoré, on utilise maintenant .site-header */
+/* (on laisse ce bloc si tu veux, mais il ne sert plus) */
+header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #1f2937;
+    background: #020617;
+}
+
+/* Mise en page principale */
+
+main {
+    max-width: 1250px;
+    margin: 2rem auto 3rem;
+    padding: 0 1.5rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Grille des colonnes */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.col {
+    background: radial-gradient(circle at top left, #111827 0, #020617 60%);
+    border-radius: 0.8rem;
+    border: 1px solid #1f2937;
+    padding: 1rem 1rem 1.2rem;
+}
+
+.col h2 {
+    margin-top: 0;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    color: #e5e7eb;
+}
+
+/* Listes & liens */
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+li + li {
+    margin-top: 0.35rem;
+}
+
+.logo {
+    width: 22px;
+    height: 22px;
+    object-fit: cover;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+a.link {
+    color: #7dd3fc;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+a.link:hover {
+    text-decoration: underline;
+}
+
+/* Grille responsive */
+
+@media (max-width: 1100px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Bandeau POPARNASSUS (global, comme les autres pages) ===== */
 
 .site-header {
     position: sticky;
