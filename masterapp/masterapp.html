@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>MasterApp • Poparnassus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Présentation de MasterApp, le noyau modulaire et distribué de l'écosystème Poparnassus."
+  />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-card: #020819;
+      --accent: #6366f1;
+      --accent-soft: rgba(99,102,241,0.18);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius: 1.25rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.32);
+      backdrop-filter: blur(18px);
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 0.75rem;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #4f46e5, #0ea5e9);
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: 0 0 18px rgba(79,70,229,0.8);
+    }
+
+    .brand-text-main {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .brand-text-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .back-link {
+      font-size: 0.8rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .back-link:hover {
+      border-color: var(--accent);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2.8rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 2.6vw + 1.3rem, 3rem);
+      line-height: 1.05;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-title span {
+      color: #a5b4fc;
+      text-shadow: 0 0 22px rgba(129,140,248,0.85);
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 36rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.32rem 0.72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: rgba(15,23,42,0.9);
+      white-space: nowrap;
+    }
+
+    .chip-accent {
+      border-color: rgba(99,102,241,0.8);
+      background: rgba(99,102,241,0.18);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #0ea5e9);
+      color: white;
+      box-shadow: 0 16px 30px rgba(37,99,235,0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    .btn-ghost {
+      background: rgba(15,23,42,0.95);
+      color: var(--text);
+      border-color: rgba(148,163,184,0.6);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.2), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(129,140,248,0.25), transparent 55%),
+                  #020617;
+      border-radius: var(--radius);
+      border: 1px solid rgba(148,163,184,0.3);
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 18px 42px rgba(0,0,0,0.6);
+    }
+
+    .hero-card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .metric {
+      padding: 0.6rem 0.7rem;
+      border-radius: 0.9rem;
+      background: rgba(15,23,42,0.92);
+      border: 1px solid rgba(31,41,55,0.95);
+      font-size: 0.78rem;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      margin-bottom: 0.1rem;
+    }
+
+    .metric-value {
+      font-weight: 500;
+    }
+
+    .section {
+      margin-bottom: 2.4rem;
+    }
+
+    .section h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .section p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 46rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 1rem 1rem 0.9rem;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.6);
+      font-size: 0.86rem;
+    }
+
+    .card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0;
+    }
+
+    .card ul li {
+      margin-bottom: 0.25rem;
+      color: #d1d5db;
+    }
+
+    .card ul li::before {
+      content: "•";
+      color: var(--accent);
+      margin-right: 0.35rem;
+    }
+
+    .resources {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1rem;
+    }
+
+    .resource {
+      background: rgba(15,23,42,0.95);
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(75,85,99,0.95);
+      padding: 0.9rem;
+      font-size: 0.84rem;
+    }
+
+    .resource-title {
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .resource a {
+      color: #a5b4fc;
+      font-size: 0.8rem;
+      word-break: break-all;
+    }
+
+    footer {
+      margin-top: 2.4rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.76rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .hero-card {
+        order: -1;
+      }
+      .grid-3,
+      .resources {
+        grid-template-columns: minmax(0,1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div>
+          <div class="brand-text-main">Poparnassus • MasterApp</div>
+          <div class="brand-text-sub">Noyau modulaire & réseau distribué</div>
+        </div>
+      </div>
+      <a class="back-link" href="../index.html">
+        ← Retour au site principal
+      </a>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1 class="hero-title">
+          MasterApp<br />
+          <span>le noyau commun de ton écosystème</span>
+        </h1>
+        <p class="hero-sub">
+          MasterApp est un noyau Python modulaire qui orchestre tes modules
+          (réseau, VPN, bots de trading, IA, etc.), surveille les processus,
+          centralise les logs et prépare un réseau de nœuds distribués avec un
+          bloc Genesis sous contrôle Poparnassus.
+        </p>
+        <div class="chips">
+          <span class="chip chip-accent">Noyau & System</span>
+          <span class="chip">Modules isolés (subprocess)</span>
+          <span class="chip">Registre interne & logs</span>
+          <span class="chip">Blockchain & intégrité (à venir)</span>
+        </div>
+        <div class="buttons">
+          <a
+            class="btn btn-primary"
+            href="https://www.mindomo.com/mindmap/masterapp-27830eba7a814d84916302ba74d97c92"
+            target="_blank"
+            rel="noopener"
+          >
+            🧠 Mindmap MasterApp
+          </a>
+          <a
+            class="btn btn-ghost"
+            href="https://github.com/Poparnassus30"
+            target="_blank"
+            rel="noopener"
+          >
+            🔗 Dépôts GitHub liés
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h2>État du projet</h2>
+        <p>
+          Version noyau en cours de stabilisation. Objectif : une V1 autonome,
+          sans IA, avec vérification d’intégrité et gestion propre des modules.
+        </p>
+        <div class="hero-metrics">
+          <div class="metric">
+            <div class="metric-label">Composants principaux</div>
+            <div class="metric-value">noyau, system, registre, modules</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Type</div>
+            <div class="metric-value">Orchestrateur multi-modules</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Vision</div>
+            <div class="metric-value">Réseau de nœuds MasterApp</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Status</div>
+            <div class="metric-value">Dev actif / expérimental</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h2>Architecture de MasterApp</h2>
+      <p>
+        MasterApp est construit autour d’un noyau central qui délègue à des gestionnaires
+        spécialisés la configuration, les threads, les subprocess, les sockets et,
+        plus tard, la mémoire et la blockchain interne. Chaque module fonctionne
+        comme un mini-système autonome, connecté au noyau.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Noyau & System</h3>
+          <p>Le cœur qui orchestre l’ensemble.</p>
+          <ul>
+            <li>Initialisation du nœud MasterApp</li>
+            <li>Chargement de la configuration (config.ini)</li>
+            <li>Logger centralisé & gestion des logs</li>
+            <li>Gestion des threads & événements système</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Modules autonomes</h3>
+          <p>Chaque module tourne isolé, piloté par le noyau.</p>
+          <ul>
+            <li>VPN décentralisé (revenus passifs)</li>
+            <li>Bot de trading spot (scalping & accumulation BTC)</li>
+            <li>Modules réseau (Nmap, scanners, analyse trafic)</li>
+            <li>IA Core / Bittensor en tant que module externe</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Réseau & Genesis</h3>
+          <p>Vision long terme de MasterApp.</p>
+          <ul>
+            <li>Nœud Genesis contrôlé par Poparnassus</li>
+            <li>Partage de calcul entre nœuds MasterApp</li>
+            <li>Blockchain interne pour tracer versions & actions</li>
+            <li>Authentification maître renforcée</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Ressources autour de MasterApp</h2>
+      <p>
+        Les éléments suivants servent de mémoire externe au projet : diagrammes,
+        code source et tableaux de suivi. L’idée est de pouvoir reconstituer
+        MasterApp (et son comportement) à partir de ces ressources.
+      </p>
+
+      <div class="resources">
+        <div class="resource">
+          <div class="resource-title">Mindmap MasterApp (Mindomo)</div>
+          <p>Vue globale de l’architecture, des modules et de la roadmap.</p>
+          <a
+            href="https://www.mindomo.com/mindmap/masterapp-27830eba7a814d84916302ba74d97c92"
+            target="_blank"
+            rel="noopener"
+          >
+            Ouvrir la mindmap →
+          </a>
+        </div>
+
+        <div class="resource">
+          <div class="resource-title">Dépôt GitHub MasterApp</div>
+          <p>Code du noyau, du système et des premiers modules.</p>
+          <!-- Remplace le lien par le dépôt exact quand tu veux -->
+          <a
+            href="https://github.com/Poparnassus30/MasterApp"
+            target="_blank"
+            rel="noopener"
+          >
+            Voir les dépôts Poparnassus →
+          </a>
+        </div>
+
+        <div class="resource">
+          <div class="resource-title">Suivi du projet (Google Sheets)</div>
+          <p>
+            Classeur prévu pour documenter fichiers, classes, méthodes
+            et versions de chaque module.
+          </p>
+          <a href="#" onclick="alert('https://docs.google.com/spreadsheets/d/12N1kR9Q0FhGhTtG4Y9-TIo01BYLhasOrvgDZ0FFdPoM/edit?usp=sharing'); return false;">
+            Lien Google Sheet – à venir →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Roadmap rapide</h2>
+      <p>
+        Objectif court terme : une V1 de MasterApp entièrement autonome (sans IA),
+        capable de lancer et arrêter proprement les modules, avec gestion de
+        l’intégrité via hash des fichiers. Ensuite seulement, on connecte les IA
+        et le réseau distribué.
+      </p>
+      <ul style="font-size:0.88rem; color:#d1d5db; margin-left:1rem; margin-top:0.4rem;">
+        <li>V1 – Noyau + System + ManagerSubprocess + Registre stable</li>
+        <li>V2 – Intégration de la blockchain interne & hashing systématique</li>
+        <li>V3 – Connexion à un réseau de nœuds MasterApp (Genesis + nœuds de support)</li>
+        <li>V4 – Intégration IA / Bittensor comme module standardisé</li>
+      </ul>
+    </section>
+
+    <footer>
+      <span>© <span id="year"></span> Poparnassus • MasterApp</span>
+      <span>Instance de documentation statique – hébergée sur GitHub Pages.</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
